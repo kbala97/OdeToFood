@@ -1,0 +1,26 @@
+﻿@model IEnumerable<OdeToFood.Models.RestaurantReview>
+
+@{
+    ViewBag.Title = "IndexForReviews";
+
+}
+
+<h2>Restaurant Reviews</h2>
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+private ApplicationDbContext db = new ApplicationDbContext();
+
+@*// GET: PersonalDetails
+  public ActionResult Index()
+  {
+      return View(db.PersonalDetails.ToList());
+  }*@
+
+
+
+
+
