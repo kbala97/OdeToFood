@@ -1,4 +1,6 @@
-﻿namespace OdeToFood.Models
+﻿using System.Data.Entity;
+
+namespace OdeToFood.Models
 {
 	public class OdeToFoodDb : DbContext
 	{
@@ -6,8 +8,8 @@
 		{
 
 		}
-		public Dbset<Restaurant> Restaurants { get; set; }
-		public Dbset<RestaurantReview> Reviews { get; set; }
+		public DbSet<Restaurant> Restaurants { get; set; }
+		public DbSet<RestaurantReview> Reviews { get; set; }
 
 
 	}

@@ -13,7 +13,7 @@ namespace OdeToFood.Controllers
 		
 		public ActionResult Index()
 		{
-			var model = _db.Restaurants;
+			var model = _db.Restaurants.ToList();
 			return View(model);
 		}
 
@@ -39,7 +39,7 @@ namespace OdeToFood.Controllers
 		{
 			if (_db != null)
 			{
-				
+				_db.Dispose();
 			}
 			
 			base.Dispose(disposing);
