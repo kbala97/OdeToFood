@@ -4,47 +4,67 @@ namespace OdeToFood.Migrations
 	using System;
 	using System.Collections.Generic;
 	using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+	using System.Data.Entity.Migrations;
+	using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<OdeToFood.Models.OdeToFoodDb>
-    {
-        public Configuration()
-        {
-            AutomaticMigrationsEnabled = true;
-        }
+	internal sealed class Configuration : DbMigrationsConfiguration<OdeToFood.Models.OdeToFoodDb>
+	{
+		public Configuration()
+		{
+			AutomaticMigrationsEnabled = true;
+		}
 
-        protected override void Seed(OdeToFood.Models.OdeToFoodDb context)
-        {
-			//  This method will be called after migrating to the latest version.
-
-			context.Restaurants.AddOrUpdate(r => r.Name,
-				new Models.Restaurant { Name = "AlbanyFood", City = "Cohoes", Country = "USA" },
-				new Models.Restaurant {Name = "IthacaFood", City = "Ithaca", Country = "USA"},
-				new Models.Restaurant
+		protected override void Seed(OdeToFood.Models.OdeToFoodDb context)
+		{
+			context.Restaurants.AddOrUpdate
+			(r => r.Name,
+				new Restaurant { Name = "IthacaHome", City = "NYC", Country = "USA" },
+				new Restaurant
 				{
-					Name = "HomeFood",
+					Name = "AlbanyHome",
+					City = "Cohoes",
+					Country = "USA",
+					Reviews =
+						new List<RestaurantReview>
+						{
+							new RestaurantReview {Rating = 10, Body = "Healthy Food", ReviewerName = "ManFromDC1"},
+							new RestaurantReview {Rating = 10, Body = "Healthy Food Yes", ReviewerName = "ManFromDC2"},
+						}
+				},
+				new Restaurant
+				{
+					Name = "NYCHome",
 					City = "NYC",
 					Country = "USA",
-					Reviews = new List<RestaurantReview>
-					{
-						new RestaurantReview { Rating = 9, Body = "Love it", ReviewerName = "Me"},
-						new RestaurantReview {Rating = 10, Body = "Our Mama cooks the best!", ReviewerName = "ManFromDC"}
-					}
-				}
+					Reviews =
+						new List<RestaurantReview>
+						{
+							new RestaurantReview {Rating = 3, Body = "Maama!!", ReviewerName = "NYCGal1"},
+							new RestaurantReview {Rating = 3, Body = "Maama is best!!", ReviewerName = "NYCGal2"},
+							new RestaurantReview {Rating = 3, Body = "Go East or West, Maama is best", ReviewerName = "NYCGal3", ReviewCity = "NYC"},
+							new RestaurantReview {Rating = 1, Body = "Go East or West, Maama is bestest", ReviewerName = "NYCGal4", ReviewCity = "NYC"},
+//							Note the last review did not get pulled in by Database-Update
+						}
 
+				}
 				);
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
-        }
-    }
+
+		}
+	}
 }
+					//  This method will be called after migrating to the latest version.
+
+					//  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+					//  to avoid creating duplicate seed data. E.g.
+					//
+					//    context.People.AddOrUpdate(
+					//      p => p.FullName,
+					//      new Person { FullName = "Andrew Peters" },
+					//      new Person { FullName = "Brice Lambson" },
+					//      new Person { FullName = "Rowan Miller" }
+					//    );
+					//
+//				}
+//	}
+//}

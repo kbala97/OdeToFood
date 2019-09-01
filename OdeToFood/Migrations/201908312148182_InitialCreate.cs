@@ -25,6 +25,7 @@ namespace OdeToFood.Migrations
                         ID = c.Int(nullable: false, identity: true),
                         Rating = c.Int(nullable: false),
                         Body = c.String(),
+                        ReviewerName = c.String(),
                         RestaurantID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)

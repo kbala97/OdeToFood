@@ -11,6 +11,7 @@ namespace OdeToFood.Models
 		public int Rating { get; set; }
 		public string Body { get; set; }
 		public string ReviewerName { get; set; }
+		public string ReviewCity { get; set; }
 		public int RestaurantID { get; set; }
 
 	}
