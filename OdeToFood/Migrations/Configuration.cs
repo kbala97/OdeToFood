@@ -42,8 +42,6 @@ namespace OdeToFood.Migrations
 							new RestaurantReview {Rating = 3, Body = "Maama!!", ReviewerName = "NYCGal1"},
 							new RestaurantReview {Rating = 3, Body = "Maama is best!!", ReviewerName = "NYCGal2"},
 							new RestaurantReview {Rating = 3, Body = "Go East or West, Maama is best", ReviewerName = "NYCGal3", ReviewCity = "NYC"},
-							new RestaurantReview {Rating = 1, Body = "Go East or West, Maama is bestest", ReviewerName = "NYCGal4", ReviewCity = "NYC"},
-//							Note the last review did not get pulled in by Database-Update
 						}
 
 				}

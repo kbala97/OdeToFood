@@ -10,114 +10,47 @@ namespace OdeToFood.Controllers
 	public class ReviewsController : Controller
 
 	{
+		OdeToFoodDb _db = new OdeToFoodDb();
 
 		// GET: Reviews
-		public ActionResult Index()
+		public ActionResult Index([Bind(Prefix = "Id")] int restaurantId)
 		{
+			var restaurant = _db.Restaurants.Find(restaurantId);
+			if (restaurant != null)
+			{
+				return View(restaurant);
+			}
+			return HttpNotFound();
 
-
-			return View();
 		}
 
-		// GET: Reviews/Details/5
-		//     public ActionResult Details(int id)
-		//     {
-		//var review = _reviews.Single(r => r.ID == id);
-		//         return View(review);
-		//     }
 
-		// GET: Reviews/Create
-		public ActionResult Create()
+		// Get and Post Reviews/Create
+		[HttpGet]
+		public ActionResult Create(int restaurantId)
 		{
+			
 			return View();
-		}
 
-		// POST: Reviews/Create
+		}
 		[HttpPost]
-		public ActionResult Create(FormCollection collection)
+		public ActionResult Create(RestaurantReview review)
 		{
-			try
+			if (ModelState.IsValid)
 			{
-				// TODO: Add insert logic here
-
-				return RedirectToAction("Index");
+				_db.Reviews.Add(review);
+				_db.SaveChanges();
+				return RedirectToAction("Index", new { id = review.RestaurantID });
 			}
-			catch
-			{
-				return View();
-			}
+			return View(review);
 		}
 
-		// GET: Reviews/Edit/5
-		public ActionResult Edit(int id)
+
+		protected override void Dispose(bool disposing)
 		{
-			return View();
+			_db.Dispose();
+			base.Dispose(disposing);
 		}
-
-		// POST: Reviews/Edit/5
-		//    [HttpPost]
-		//    public ActionResult Edit(int id, FormCollection collection)
-		//    {
-		//        try
-		//        {
-		//// TODO: Add update logic here
-		//var review = _reviews.Single(r => r.ID == id);
-		//TryUpdateModel(review);
-
-		//            return RedirectToAction("Index");
-		//        }
-		//        catch
-		//        {
-		//            return View(_reviews);
-		//        }
-		//    }
-
-		// GET: Reviews/Delete/5
-		public ActionResult Delete(int id)
-		{
-			return View();
-		}
-
-		// POST: Reviews/Delete/5
-		[HttpPost]
-		public ActionResult Delete(int id, FormCollection collection)
-		{
-			try
-			{
-				// TODO: Add delete logic here
-
-				return RedirectToAction("Index");
-			}
-			catch
-			{
-				return View();
-			}
-		}
-
-		//static List<RestaurantReview> _reviews = new List<RestaurantReview>
-		//{
-
-		//	new RestaurantReview
-		//	{
-		//		ID = 1,
-		//		Name = "FoodPlace1",
-		//		//City = "<script> alert('xss'); </script>",
-		//		City = "New York",
-		//		Country = "USA",
-		//		Rating = 5
-
-		//	},
-
-		//	new RestaurantReview
-		//	{
-		//		ID = 2,
-		//		Name = "FoodPlace2",
-		//		City = "Bloomington",
-		//		Country = "USA",
-		//		Rating = 3
-		//	}
-
-		//};
 
 
 
