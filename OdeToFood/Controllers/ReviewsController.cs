@@ -45,6 +45,35 @@ namespace OdeToFood.Controllers
 			return View(review);
 		}
 
+		// Get and Post Reviews/Edit
+		[HttpGet]
+
+		public ActionResult Edit(int id)
+		{
+                var review = _db.Reviews.Find(id);
+                return View(review);
+
+        }
+
+		[HttpPost]
+		public ActionResult Edit(RestaurantReview review)
+		{
+			if (ModelState.IsValid)
+			{
+
+				//RestaurantReview r = new RestaurantReview();
+    //            r = _db.Reviews.Find(review);
+    //            r.Rating = review.Rating;
+				//r.RestaurantID = review.RestaurantID;
+				//r.Rating = review.Rating;
+				//r.ReviewerName = review.ReviewerName;
+				//r.ReviewCity = review.ReviewCity;
+								
+				_db.SaveChanges();
+				return RedirectToAction("Index", new { id = review.RestaurantID });
+			}
+			return View(review);
+		}
 
 		protected override void Dispose(bool disposing)
 		{
