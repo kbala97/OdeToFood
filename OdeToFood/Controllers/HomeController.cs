@@ -10,15 +10,32 @@ namespace OdeToFood.Controllers
 	public class HomeController : Controller
 	{
 		OdeToFoodDb _db = new OdeToFoodDb();
-		
-		public ActionResult Index(string searchTerm = null)
+
+        public ActionResult Autocomplete(string term)
+        {
+            var model = _db.Restaurants
+            .Where(r => r.Name.StartsWith(term))
+            .Take(10)
+            .Select(r => new
+            {
+                label = r.Name
+            });
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult Index(string searchTerm = null)
 		{
-			//var model = _db.Restaurants.ToList();
-			var model = _db.Restaurants
-			.OrderByDescending(r => r.Reviews.Average(review => review.Rating)) 
-			.Where (r => searchTerm == null || r.Name.StartsWith(searchTerm))
-			 
-			.Select (r => new RestaurantListViewModel
+            //var model = _db.Restaurants.ToList();
+            var model = _db.Restaurants
+            .OrderByDescending(r => r.Reviews.Average(review => review.Rating))
+            .Where(r => searchTerm == null || r.Name.StartsWith(searchTerm))
+
+            // The key is here; suggested by someone on stackoverflow. You need .ToList() otherwise the RVM model below is not understood 
+            .ToList()
+
+            .Select (r => new RestaurantListViewModel
 			{
 				Id = r.Id,
 				Name = r.Name,
@@ -28,8 +45,12 @@ namespace OdeToFood.Controllers
 
 			});
 
-			
-			return View(model);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Restaurants", model);
+            }
+
+            return View(model);
 		}
 
 		public ActionResult About()

@@ -55,7 +55,8 @@ namespace OdeToFood.Migrations
             }
 
 
-		}
+
+        }
 	}
 }
 					//  This method will be called after migrating to the latest version.
