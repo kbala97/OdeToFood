@@ -3,7 +3,7 @@
         var $form = $(this);
 
         var options = {
-            url = $form.attr("action"),
+            url : $form.attr("action"),
             type: $form.attr("method"),
             data: $form.serialize()
         };
@@ -17,14 +17,29 @@
 
     };
 
+    var submitAutocompleteForm = function (event, ui) {
+        var $input = $(this);
+
+
+
+
+
+        var options = {
+            source: $input.attr("data-otf-Autocomplete"),
+            select: submitAutocompleteForm
+        };
+  
+
+    };
+
     var createAutocomplete = function () {
         var $input = $(this);
 
         var options = {
-            source: $input.attr("data-otf-Autocomplete")
+            source: $input.attr("data-otf-Autocomplete"),
+            select: submitAutocompleteForm
         };
-
-        $input.Autocomplete(options);
+        $input.autocomplete(options);
 
     };
 
