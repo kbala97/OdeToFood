@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace OdeToFood.Controllers
 {
@@ -15,7 +16,7 @@ namespace OdeToFood.Controllers
         {
             var model = _db.Restaurants
             .Where(r => r.Name.StartsWith(term))
-            .Take(10)
+ //           .Take(10)
             .Select(r => new
             {
                 label = r.Name
@@ -25,7 +26,7 @@ namespace OdeToFood.Controllers
         }
 
 
-        public ActionResult Index(string searchTerm = null)
+        public ActionResult Index(string searchTerm = null, int page = 1)
 		{
             //var model = _db.Restaurants.ToList();
             var model = _db.Restaurants
@@ -43,7 +44,7 @@ namespace OdeToFood.Controllers
 				Country = r.Country,
 				CountOfReviews = r.Reviews.Count()
 
-			});
+			}).ToPagedList(page, 10);
 
             if (Request.IsAjaxRequest())
             {
