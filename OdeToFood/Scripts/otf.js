@@ -21,7 +21,6 @@
 
     var getPage = function () {
         var $a = $(this);
-            debugger
         var options = {
             url: $a.attr("href"),
             data: $("form").serialize(),
@@ -31,7 +30,7 @@
         $.ajax(options).done(function (data) {
             //var $target = $a.parents("div.pagedList").attr("data-otf-target");
             //var $target = $($a.parents("div.pagedlist").attr("data-otf-target"));
-            var $target = "#restaurantList";
+            var $target = $("#restaurantList");
 
             $target.replaceWith(data);
 
@@ -60,8 +59,7 @@
 
     };
 
-        $("form[data-otf-ajax='true']").submit(ajaxFormSubmit);
-        $("input[data-otf-Autocomplete]").each(createAutocomplete);
+    $("form[data-otf-ajax='true']").submit(ajaxFormSubmit);
+    $("input[data-otf-Autocomplete]").each(createAutocomplete);
     $(".main-content").on("click", ".pagedList a", getPage);
-
  });

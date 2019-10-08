@@ -30,13 +30,15 @@
     </div>
 
     <div class="container body-content">
+        <section class="content-wrapper main-content clear-fix">
             @RenderBody()
-            <hr />
+        </section>
+        <hr />
 
-            <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>
-        </div>
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
 
 
  
